@@ -14,8 +14,14 @@ router.get("/", function(req, res, next) {
 
   var subprocess = runScript(); // print output of script
 
-  subprocess.stdout.on("data", function(data) {
-    res.send(data);
+  subprocess.stdout.on("data", data => {
+    if (!res.headersSent) res.send(data);
+  });
+  subprocess.stderr.on("data", data => {
+    console.log(`error:${data}`);
+  });
+  subprocess.stderr.on("close", () => {
+    console.log("Closed");
   });
 });
 module.exports = router;
