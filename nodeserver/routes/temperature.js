@@ -15,7 +15,6 @@ router.get("/", function(req, res, next) {
   var subprocess = runScript(); // print output of script
 
   subprocess.stdout.on("data", function(data) {
-    console.log("data:".concat(data));
     res.send(data);
   });
 });
