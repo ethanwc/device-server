@@ -21,9 +21,7 @@ def main(argv):
             argument = arg
     # print output
     print("Start : %s" % time.ctime())
-    time.sleep(2)
     print('Foo is')
-    time.sleep(2)
     print(argument)
     print("End : %s" % time.ctime())
 
