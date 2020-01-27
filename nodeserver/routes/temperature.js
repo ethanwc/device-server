@@ -12,7 +12,7 @@ var spawn = require("child_process").spawn;
 
 router.get("/", function (req, res, next) {
   function runScript() {
-    return spawn("python", ["-u", path.join(__dirname, "hello.py")]);
+    return spawn("python", ["-u", path.join(__dirname, "../temperature.py")]);
   }
 
   var subprocess = runScript(); // print output of script
