@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var temperatureRouter = require("./routes/temperature");
+var ledRouter = require("./routes/led");
 
 var app = express();
 
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/temperature", temperatureRouter);
+app.use("/led", ledRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
