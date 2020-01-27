@@ -7,7 +7,7 @@ var spawn = require("child_process").spawn;
 /* GET temperature listing. */
 
 router.post("/", function(req, res, next) {
-  const hex = req.body.devicestate.color;
+  var hex = req.body.devicestate.color;
   function hexToR(h) {
     return parseInt(cutHex(h).substring(0, 2), 16);
   }
@@ -18,9 +18,9 @@ router.post("/", function(req, res, next) {
     return parseInt(cutHex(h).substring(4, 6), 16);
   }
 
-  const r = hexToR(hex) / 2.55;
-  const g = hexToR(hex) / 2.55;
-  const b = hexToR(hex) / 2.55;
+  var r = hexToR(hex) / 2.55;
+  var g = hexToR(hex) / 2.55;
+  var b = hexToR(hex) / 2.55;
 
   function runScript() {
     return spawn("python", [
