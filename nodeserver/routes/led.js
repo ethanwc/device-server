@@ -11,13 +11,13 @@ var spawn = require("child_process").spawn;
 
 router.post("/", function(req, res, next) {
   function runScript() {
-    return spawn("python", ["-u", path.join(__dirname, "../led.py")]);
+    return spawn("python", ["-u", path.join(__dirname, "../temperature.py")]);
   }
 
   var subprocess = runScript(); // print output of script
 
   subprocess.stdout.on("data", function(data) {
-    if (!res.headersSent) res.send(data);
+    if (!res.headersSent) res.send('okay');
   });
   subprocess.stderr.on("data", function(data) {
     console.log("error:".concat(data));
