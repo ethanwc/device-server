@@ -7,6 +7,7 @@ var spawn = require("child_process").spawn;
 /* GET temperature listing. */
 
 router.post("/", function(req, res, next) {
+  console.log(req.body.devicestate);
   hex = req.body.devicestate.color;
   hex = hex.replace("#", "");
   r = parseInt(hex.substring(0, 2), 16) / 2.55;
