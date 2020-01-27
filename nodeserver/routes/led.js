@@ -23,6 +23,7 @@ router.post("/", function(req, res, next) {
   var b = hexToR(hex) / 2.55;
 
   function runScript() {
+    console.log("Running led with", r, g, b);
     return spawn("python", [
       "-u",
       path.join(__dirname, ["../led.py", r, g, b])
@@ -32,7 +33,7 @@ router.post("/", function(req, res, next) {
   var subprocess = runScript(); // print output of script
 
   subprocess.stdout.on("data", function(data) {
-    if (!res.headersSent) res.send("okay");
+    if (!res.headersSent) res.status(200).send();
   });
   subprocess.stderr.on("data", function(data) {
     console.log("error:".concat(data));
