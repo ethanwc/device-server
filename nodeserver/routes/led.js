@@ -7,20 +7,11 @@ var spawn = require("child_process").spawn;
 /* GET temperature listing. */
 
 router.post("/", function(req, res, next) {
-  var hex = req.body.devicestate.color;
-  function hexToR(h) {
-    return parseInt(cutHex(h).substring(0, 2), 16);
-  }
-  function hexToG(h) {
-    return parseInt(cutHex(h).substring(2, 4), 16);
-  }
-  function hexToB(h) {
-    return parseInt(cutHex(h).substring(4, 6), 16);
-  }
-
-  var r = hexToR(hex) / 2.55;
-  var g = hexToR(hex) / 2.55;
-  var b = hexToR(hex) / 2.55;
+  hex = req.body.devicestate.color;
+  hex = hex.replace("#", "");
+  r = parseInt(hex.substring(0, 2), 16) / 2.55;
+  g = parseInt(hex.substring(2, 4), 16) / 2.55;
+  b = parseInt(hex.substring(4, 6), 16) / 2.55;
 
   function runScript() {
     console.log("Running led with", r, g, b);
