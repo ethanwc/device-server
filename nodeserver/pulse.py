@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO     # Importing RPi library to use the GPIO pins
 from time import sleep  # Importing sleep from time library
 import random
+import sys
 green_led_pin = 21            # Initializing the GPIO pin 21 for LED
 red_led_pin = 20
 blue_led_pin = 16
@@ -15,8 +16,8 @@ pwn_red.start(50)
 pwm_blue = GPIO.PWM(blue_led_pin, 100)
 pwm_blue.start(50)
 
-while 1:                    # Loop will run forever
-    sleep(.1)
-    pwn_red.ChangeDutyCycle(random.randint(1,100))
-    pwm_green.ChangeDutyCycle(random.randint(1,100))
-    pwm_blue.ChangeDutyCycle(random.randint(1,100))
+
+pwn_red.ChangeDutyCycle(sys.argv[1])
+pwm_green.ChangeDutyCycle(sys.argv[1])
+pwm_blue.ChangeDutyCycle(sys.argv[1])
+sleep(1)

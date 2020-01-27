@@ -1,11 +1,8 @@
 "use strict";
 
 var express = require("express");
-
 var router = express.Router();
-
 var path = require("path");
-
 var spawn = require("child_process").spawn;
 /* GET temperature listing. */
 

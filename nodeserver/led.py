@@ -1,28 +1,26 @@
-import os
-import time
+import RPi.GPIO as GPIO     # Importing RPi library to use the GPIO pins
+from time import sleep  # Importing sleep from time library
+import random
+import sys
 
-os.system('modprobe w1-gpio')
-os.system('modprobe w1-therm')
+green_led_pin = 21            # Initializing the GPIO pin 21 for LED
+red_led_pin = 20
+blue_led_pin = 16
 
-base_dir = '/sys/bus/w1/devices/'
-device_id = '28-8000002b3b3d'
-device_file = base_dir + device_id + '/w1_slave'
+GPIO.setmode(GPIO.BCM)          # We are using the BCM pin numbering
+GPIO.setup(green_led_pin, GPIO.OUT)   
+GPIO.setup(red_led_pin, GPIO.OUT)
+GPIO.setup(blue_led_pin, GPIO.OUT)
 
-def read_temp_raw():
-    f = open(device_file, 'r')
-    lines = f.readlines()
-    f.close()
-    return lines
+pwm_green = GPIO.PWM(green_led_pin, 100)    # Created a PWM object
+pwm_green.start(0)                    # Started PWM at 0% duty cycle
+pwn_red = GPIO.PWM(red_led_pin, 100)
+pwn_red.start(50)
+pwm_blue = GPIO.PWM(blue_led_pin, 100)
+pwm_blue.start(50)
 
-def read_temp():
-    lines = read_temp_raw()
-    while lines[0].strip()[-3:] != 'YES':
-        time.sleep(0.2)
-        lines = read_temp_raw()
-    equals_pos = lines[1].find('t=')
-    if equals_pos != -1:
-        temp_string = lines[1][equals_pos+2:]
-        temp_c = float(temp_string) / 1000.0
-        return temp_c
 
-print read_temp()
+pwn_red.ChangeDutyCycle(random.randint(1,100))
+pwm_green.ChangeDutyCycle(random.randint(1,100))
+pwm_blue.ChangeDutyCycle(random.randint(1,100))
+sleep(1)
