@@ -8,12 +8,12 @@ var spawn = require("child_process").spawn;
 
 router.post("/", function(req, res, next) {
   console.log(req.body.devicestate.color);
-  hex = req.body.devicestate.color;
-  hex = hex.replace("#", "");
-  r = parseInt(hex.substring(0, 2), 16) / 2.55;
-  g = parseInt(hex.substring(2, 4), 16) / 2.55;
-  b = parseInt(hex.substring(4, 6), 16) / 2.55;
-
+  var hex = req.body.devicestate.color;
+  console.log(hex);
+  var r = parseInt(hex.substring(0, 2), 16) / 2.55;
+  var g = parseInt(hex.substring(2, 4), 16) / 2.55;
+  var b = parseInt(hex.substring(4, 6), 16) / 2.55;
+  console.log(r, g, b);
   function runScript() {
     console.log("Running led with", r, g, b);
     return spawn("python", [
